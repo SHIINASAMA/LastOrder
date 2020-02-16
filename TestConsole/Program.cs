@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Spire.Doc;
 using Spire.Doc.Documents;
+using System.Collections;
 
 namespace TestConsole
 {
@@ -14,19 +15,62 @@ namespace TestConsole
             Document doc = new Document();
             doc.LoadFromFile(@"C:\Users\Administrator\source\repos\LastOrder\语文作文.docx");
 
-            List<Sentence> Sentences = new List<Sentence>();
+            StringBuilder text = new StringBuilder();
             foreach (Section section in doc.Sections)
             {
-                for(int i = 0; i < section.Paragraphs.Count; i++) 
+                foreach(Paragraph p in section.Paragraphs) 
                 {
-                    
+                    text.Append(p.Text);
+                }
+                text.Append('\n');
+            }
+
+            Cut(text.ToString());
+
+            foreach(DictionaryEntry de in ht) 
+            {
+                Sentence temp = (Sentence)de.Value;
+                Console.WriteLine(de.Key + "\t" + temp.Commit + "\t" + temp.Text);
+            }
+
+            Console.ReadLine();
+        }
+
+        static Hashtable ht = new Hashtable();
+        static void Cut(string AllText) 
+        {
+            if (AllText == null) return;
+
+            int LastPos = 0;
+            int NowPow = 0;
+            int Index = 0;
+            string mCommit;
+            foreach(char c in AllText) 
+            {
+                switch (c) 
+                {
+                    case '.':
+                    case '。':
+                    case '!':
+                    case '！':
+                    case '?':
+                    case '？':
+                        NowPow++;
+                        ht.Add(Index, new Sentence("接前面",AllText.Substring(LastPos,NowPow-LastPos)));
+                        LastPos = NowPow;
+                        Index++;
+                        break;
+                    case '\n':
+                        NowPow++;
+                        ht.Add(Index, new Sentence("新段落", AllText.Substring(LastPos, NowPow - LastPos)));
+                        LastPos = NowPow;
+                        Index++;
+                        break;
+                    default:
+                        NowPow++;
+                        break;
                 }
             }
-            foreach(Sentence s in Sentences)
-            {
-                Console.WriteLine(s.Commit + "\t" + s.Text + s.EndWith);
-            }
-            Console.ReadLine();
         }
     }
 }
