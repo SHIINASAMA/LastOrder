@@ -27,6 +27,7 @@ namespace TestConsole
                     context.Append(p.Range.Text + "\n");
                 }
                 app.Quit();
+
                 Console.WriteLine(context);
                 Console.ReadLine();
             }
