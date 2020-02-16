@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Spire.Doc;
-using Spire.Doc.Documents;
+using Microsoft.Office.Interop.Word;
 
 namespace TestConsole
 {
@@ -11,19 +10,31 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            Document doc = new Document();
-            doc.LoadFromFile(@"C:\Users\Administrator\source\repos\LastOrder\语文作文.docx");
-
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach(Section section in doc.Sections) 
+            try 
             {
-                foreach(Paragraph paragraph in section.Paragraphs) 
+                Application app;
+                Document doc;
+                object path = @"C:\Users\Administrator\source\repos\LastOrder\语文作文.docx";
+                object missing = Type.Missing;
+                app = new ApplicationClass();
+                doc = app.Documents.Open(ref path, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing);
+                StringBuilder context = new StringBuilder();
+                foreach (Paragraph p in doc.Paragraphs)
                 {
-                    stringBuilder.Append(paragraph.Text + "\n");
+                    context.Append(p.Range.Text + "\n");
                 }
+                app.Quit();
+                Console.WriteLine(context);
+                Console.ReadLine();
             }
-            Console.WriteLine(stringBuilder);
-            Console.ReadLine();
+            catch(SystemException se) 
+            {
+                Console.WriteLine(se.ToString() + "\n" + se.Message);
+                Console.ReadLine();
+            }
         }
     }
 }
