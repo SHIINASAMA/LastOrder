@@ -8,7 +8,7 @@ namespace LastOrder_for_Windows
 {
     class LineList
     {
-        Hashtable TheList = new Hashtable();
+        public Hashtable TheList = new Hashtable();
         public void Add(uint Index,Sentence sc) 
         {
             TheList.Add(Index, sc);

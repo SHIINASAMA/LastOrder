@@ -21,7 +21,7 @@ namespace LastOrder_for_Windows
             this.Text = Text;
         }
 
-        static string Info2String(InfoType type) 
+        public static string Info2String(InfoType type) 
         {
             switch (type) 
             {

@@ -27,13 +27,13 @@ namespace TestConsole
 
             Cut(text.ToString());
 
-            //foreach(DictionaryEntry de in ht) 
-            //{
-            //    Sentence temp = (Sentence)de.Value;
-            //    Console.WriteLine(de.Key + "\t" + temp.Info + "\t" + temp.Text);
-            //}
+            foreach (DictionaryEntry de in ht)
+            {
+                Sentence temp = (Sentence)de.Value;
+                Console.WriteLine(de.Key + "\t" + temp.Info + "\t" + temp.Text);
+            }
 
-            //Console.ReadLine();
+            Console.ReadLine();
         }
 
         static Hashtable ht = new Hashtable();

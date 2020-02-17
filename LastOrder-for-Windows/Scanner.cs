@@ -11,18 +11,19 @@ namespace LastOrder_for_Windows
     {
         public static void Scan(Document doc, LineList ll)
         {
+            uint Index = 0;
             foreach (Section section in doc.Sections)
             {
                 foreach (Paragraph paragraph in section.Paragraphs)
                 {
-                    String sb = paragraph.Text;
-                    if (sb != null) 
+                    string sb = paragraph.Text;
+                    Sentence.InfoType tp = Sentence.InfoType.Head;
+                    if (sb != null)
                     {
-                        Sentence.InfoType tp;
-                        uint Index = 0;
+
                         uint NowPos = 0;
                         uint LastPos = 0;
-                        foreach(char c in sb) 
+                        foreach (char c in sb.ToString())
                         {
                             switch (c)
                             {
@@ -33,11 +34,10 @@ namespace LastOrder_for_Windows
                                 case '?':
                                 case '？':
                                     NowPos++;
-                                    if (Index == 0) tp = Sentence.InfoType.Head;
-                                    else tp = Sentence.InfoType.Null;
-                                    ll.Add(Index, new Sentence(tp, sb.Substring((int)LastPos, (int)NowPos - (int)LastPos)));
-                                    LastPos = NowPos;
                                     Index++;
+                                    ll.Add(Index, tp, sb.ToString().Substring((int)LastPos, (int)NowPos - (int)LastPos));
+                                    tp = Sentence.InfoType.Null;
+                                    LastPos = NowPos;
                                     break;
                                 default:
                                     NowPos++;
@@ -45,7 +45,13 @@ namespace LastOrder_for_Windows
                             }
                         }
                     }
-                }
+                    char[] tag = {'.','。','!','！','?','？' };
+                    if(sb.IndexOfAny(tag) == -1 && sb.Trim() != "") 
+                    {
+                        Index++;
+                        ll.Add(Index, Sentence.InfoType.Head, sb.ToString());
+                    }
+                } 
             }
         }
     }
