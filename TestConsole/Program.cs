@@ -27,13 +27,13 @@ namespace TestConsole
 
             Cut(text.ToString());
 
-            foreach(DictionaryEntry de in ht) 
-            {
-                Sentence temp = (Sentence)de.Value;
-                Console.WriteLine(de.Key + "\t" + temp.Commit + "\t" + temp.Text);
-            }
+            //foreach(DictionaryEntry de in ht) 
+            //{
+            //    Sentence temp = (Sentence)de.Value;
+            //    Console.WriteLine(de.Key + "\t" + temp.Info + "\t" + temp.Text);
+            //}
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         static Hashtable ht = new Hashtable();
@@ -42,9 +42,9 @@ namespace TestConsole
             if (AllText == null) return;
 
             int LastPos = 0;
-            int NowPow = 0;
+            int NowPos = 0;
             int Index = 0;
-            string mCommit;
+            string mInfo;
             foreach(char c in AllText) 
             {
                 switch (c) 
@@ -55,19 +55,13 @@ namespace TestConsole
                     case '！':
                     case '?':
                     case '？':
-                        NowPow++;
-                        ht.Add(Index, new Sentence("接前面",AllText.Substring(LastPos,NowPow-LastPos)));
-                        LastPos = NowPow;
-                        Index++;
-                        break;
-                    case '\n':
-                        NowPow++;
-                        ht.Add(Index, new Sentence("新段落", AllText.Substring(LastPos, NowPow - LastPos)));
-                        LastPos = NowPow;
+                        NowPos++;
+                        ht.Add(Index, new Sentence("Null", AllText.Substring(LastPos, NowPos - LastPos)));
+                        LastPos = NowPos;
                         Index++;
                         break;
                     default:
-                        NowPow++;
+                        NowPos++;
                         break;
                 }
             }

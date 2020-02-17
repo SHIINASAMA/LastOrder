@@ -7,17 +7,17 @@ namespace TestConsole
 {
     class Sentence
     {
-        public string   Commit;         //附加文本
+        public string   Info;         //附加文本
         public string   Text;           //主要文本
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="mCommit">初始化的附加文本</param>
+        /// <param name="mInfo">初始化的附加文本</param>
         /// <param name="mText">初始化的主要文本</param>
-        public Sentence(string mCommit,string mText) 
+        public Sentence(string mInfo,string mText) 
         {
-            Commit = mCommit;
+            Info = mInfo;
             Text = mText;
         }
     }
