@@ -44,7 +44,6 @@ namespace TestConsole
             int LastPos = 0;
             int NowPos = 0;
             int Index = 0;
-            string mInfo;
             foreach(char c in AllText) 
             {
                 switch (c) 

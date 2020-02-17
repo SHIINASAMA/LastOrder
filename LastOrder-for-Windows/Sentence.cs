@@ -12,13 +12,15 @@ namespace LastOrder_for_Windows
             Head,Null
         }
 
+        public uint     Index; 
         public InfoType Info;
-        public string Text;
+        public string   Text;
 
-        public Sentence(InfoType Info,string Text) 
+        public Sentence(uint Index,InfoType Info,string Text) 
         {
-            this.Info = Info;
-            this.Text = Text;
+            this.Index = Index;
+            this.Info  = Info;
+            this.Text  = Text;
         }
 
         public static string Info2String(InfoType type) 

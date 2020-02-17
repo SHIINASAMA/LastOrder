@@ -8,20 +8,15 @@ namespace LastOrder_for_Windows
 {
     class LineList
     {
-        public Hashtable TheList = new Hashtable();
-        public void Add(uint Index,Sentence sc) 
+        public List<Sentence> TheList = new List<Sentence>();
+        public void Add(Sentence sc) 
         {
-            TheList.Add(Index, sc);
+            TheList.Add(sc);
         }
 
         public void Add(uint Index,Sentence.InfoType Info,string Text) 
         {
-            TheList.Add(Index, new Sentence(Info, Text));
-        }
-
-        public void Remove(uint Index) 
-        {
-            TheList.Remove(Index);
+            TheList.Add(new Sentence(Index,Info, Text));
         }
 
         public void Clear() 

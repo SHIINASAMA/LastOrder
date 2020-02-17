@@ -7,21 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
-using System.Collections.Generic;
 using Spire.Doc;
 using Spire.Doc.Documents;
+using System.IO;
 
 namespace LastOrder_for_Windows
 {
     public partial class MainForm : Form
     {
-        private LineList ll;
+        private uint     NowIndex;          //当前索引的位置
 
         public MainForm()
         {
             InitializeComponent();
-
-            ll = new LineList(); 
 
             //初始化表头
             ColumnHeader IndexHeader = new ColumnHeader();
@@ -33,7 +31,7 @@ namespace LastOrder_for_Windows
             TypeHeader.Text = "Type";
             TypeHeader.Width = 50;
             TextHeader.Text = "Text";
-            TextHeader.Width = 500;
+            TextHeader.Width = 800;
 
             listView1.Columns.Add(IndexHeader);
             listView1.Columns.Add(TypeHeader);
@@ -41,14 +39,13 @@ namespace LastOrder_for_Windows
 
         }
 
-        private void ShowLineList() 
+        private void ShowLineList(LineList ll) 
         {
             listView1.BeginUpdate();    
-            foreach(DictionaryEntry de in ll.TheList) 
+            foreach(Sentence sc in ll.TheList) 
             {
-                Sentence sc = (Sentence)de.Value;
                 ListViewItem lvi = new ListViewItem();
-                lvi.Text = de.Key.ToString();
+                lvi.Text = sc.Index.ToString();
                 lvi.SubItems.Add(Sentence.Info2String(sc.Info));
                 lvi.SubItems.Add(sc.Text);
                 listView1.Items.Add(lvi);
@@ -58,17 +55,37 @@ namespace LastOrder_for_Windows
 
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ll.Clear();
-            string path;
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "LO段落文档|*.LO|Word文档|*.doc|Word文档|*.docx";
-            if (dlg.ShowDialog() == DialogResult.OK) path = dlg.FileName;
-            else return;
+            try
+            {
+                string path;
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.Filter = "LO段落文档|*.LO|Word文档|*.doc|Word文档|*.docx";
+                if (dlg.ShowDialog() == DialogResult.OK) path = dlg.FileName;
+                else return;
 
-            Document doc = new Document(path);
-            Scanner.Scan(doc, ll);
+                string ext = Path.GetExtension(path).ToUpper();
+                switch (ext)
+                {
+                    case ".DOC":
+                    case ".DOCX":
+                        Document doc = new Document(path);
+                        LineList ll = new LineList();
+                        Scanner.Scan(doc, ll);
+                        ShowLineList(ll);
+                        break;
+                    case ".LO":
+                        break;
+                }
+            }
+            catch (SystemException se)
+            {
 
-            ShowLineList();
+            }
+        }
+
+        private void 查找FToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
