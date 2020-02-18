@@ -9,10 +9,11 @@ using System.Windows.Forms;
 
 namespace LastOrder_for_Windows
 {
-    public partial class FindForm : Form
+    public partial class AddMarkForm : Form
     {
         public uint Taget;
-        public FindForm()
+        public string Preview;
+        public AddMarkForm()
         {
             InitializeComponent();
         }
@@ -29,6 +30,7 @@ namespace LastOrder_for_Windows
         {
             if (textBox1.Text.Trim() == "") return;
             Taget = (uint)Int32.Parse(textBox1.Text.Trim());
+            Preview = textBox2.Text.Trim();
             DialogResult = DialogResult.OK;
             Close();
         }

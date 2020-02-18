@@ -1,4 +1,5 @@
-﻿using System;
+﻿//负责从Word文档中读取并保存为LineList
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace LastOrder_for_Windows
     {
         public static void Scan(Document doc, LineList ll)
         {
+            ll.Clear();
             uint Index = 0;
             foreach (Section section in doc.Sections)
             {

@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             this.MenuBar = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.查找FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +44,9 @@
             this.PreBtn = new System.Windows.Forms.Button();
             this.NowStatus = new System.Windows.Forms.StatusStrip();
             this.Tab1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.书签BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuBar.SuspendLayout();
             this.NowStatus.SuspendLayout();
             this.SuspendLayout();
@@ -68,6 +69,7 @@
             this.保存ToolStripMenuItem,
             this.另存为ToolStripMenuItem,
             this.toolStripSeparator1,
+            this.书签BToolStripMenuItem,
             this.查找FToolStripMenuItem,
             this.toolStripSeparator2,
             this.关闭ToolStripMenuItem,
@@ -95,11 +97,6 @@
             this.另存为ToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.另存为ToolStripMenuItem.Text = "另存为(&A)";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(125, 6);
-            // 
             // 查找FToolStripMenuItem
             // 
             this.查找FToolStripMenuItem.Name = "查找FToolStripMenuItem";
@@ -107,22 +104,17 @@
             this.查找FToolStripMenuItem.Text = "查找(&F)";
             this.查找FToolStripMenuItem.Click += new System.EventHandler(this.查找FToolStripMenuItem_Click);
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(125, 6);
-            // 
             // 关闭ToolStripMenuItem
             // 
             this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.关闭ToolStripMenuItem.Text = "关闭(&C)";
             this.关闭ToolStripMenuItem.Click += new System.EventHandler(this.关闭ToolStripMenuItem_Click);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.退出ToolStripMenuItem.Text = "退出(&E)";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
@@ -139,11 +131,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.listView1.FullRowSelect = true;
-            listViewGroup3.Header = "ListViewGroup";
-            listViewGroup3.Name = "Index";
-            listViewGroup3.Tag = "索引值";
+            listViewGroup4.Header = "ListViewGroup";
+            listViewGroup4.Name = "Index";
+            listViewGroup4.Tag = "索引值";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup3});
+            listViewGroup4});
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(0, 28);
             this.listView1.MultiSelect = false;
@@ -153,6 +145,7 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
+            this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
             // 
             // textBox2
             // 
@@ -204,6 +197,23 @@
             this.Tab1.Size = new System.Drawing.Size(32, 17);
             this.Tab1.Text = "就绪";
             // 
+            // 书签BToolStripMenuItem
+            // 
+            this.书签BToolStripMenuItem.Name = "书签BToolStripMenuItem";
+            this.书签BToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.书签BToolStripMenuItem.Text = "书签(&B)";
+            this.书签BToolStripMenuItem.Click += new System.EventHandler(this.书签BToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -241,11 +251,12 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button NextBtn;
         private System.Windows.Forms.Button PreBtn;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem 查找FToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.StatusStrip NowStatus;
         private System.Windows.Forms.ToolStripStatusLabel Tab1;
+        private System.Windows.Forms.ToolStripMenuItem 书签BToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

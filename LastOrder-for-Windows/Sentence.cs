@@ -1,4 +1,5 @@
-﻿using System;
+﻿//单独的句子类
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
