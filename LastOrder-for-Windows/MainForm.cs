@@ -76,6 +76,9 @@ namespace LastOrder_for_Windows
                         ShowLineList(ll);
                         break;
                     case ".LO":
+                        FileManager fm = new FileManager();
+                        fm.LoadFromFile(path, ll);
+                        ShowLineList(ll);
                         break;
                 }
             }
@@ -110,10 +113,11 @@ namespace LastOrder_for_Windows
         {
             if (listView1.SelectedItems.Count == 0) return;
             if (listView1.Items.Count == 0) return;
-            if (listView1.Items.IndexOf(listView1.SelectedItems[0]) <= 0) return;
+            int i;
+            if ((i = listView1.Items.IndexOf(listView1.SelectedItems[0])) <= 0) return;
 
-            listView1.Items[listView1.Items.IndexOf(listView1.SelectedItems[0]) - 1].Selected = true;
-            listView1.Items[listView1.Items.IndexOf(listView1.SelectedItems[0]) - 1].EnsureVisible();
+            listView1.Items[listView1.Items.IndexOf(listView1.SelectedItems[0]) -1].Selected = true;
+            listView1.Items[listView1.Items.IndexOf(listView1.SelectedItems[0])].EnsureVisible();
             if (listView1.Items.IndexOf(listView1.SelectedItems[0]) <= 0) return;
             ShowStatus();
         }
@@ -124,7 +128,7 @@ namespace LastOrder_for_Windows
             if (listView1.Items.IndexOf(listView1.SelectedItems[0]) == listView1.Items.Count - 1) return;
 
             listView1.Items[listView1.Items.IndexOf(listView1.SelectedItems[0]) + 1].Selected = true;
-            listView1.Items[listView1.Items.IndexOf(listView1.SelectedItems[0]) + 1].EnsureVisible();
+            listView1.Items[listView1.Items.IndexOf(listView1.SelectedItems[0])].EnsureVisible();
             if (listView1.Items.IndexOf(listView1.SelectedItems[0]) <= 0) return;
             ShowStatus();
         }
@@ -189,6 +193,18 @@ namespace LastOrder_for_Windows
             }
             ml = mf.ml;
             GC.Collect();
+        }
+
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "LO段落文件|*.LO";
+            sfd.FileName = "New File.LO";
+            if(sfd.ShowDialog() == DialogResult.OK && sfd.FileName != null) 
+            {
+                FileManager fm = new FileManager();
+                fm.SaveAs(sfd.FileName, ll);
+            }
         }
     }
 }

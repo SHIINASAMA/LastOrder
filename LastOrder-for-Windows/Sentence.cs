@@ -36,5 +36,18 @@ namespace LastOrder_for_Windows
                     return null;
             }
         }
+
+        public static InfoType String2Info(string str) 
+        {
+            switch (str) 
+            {
+                case "段首":
+                    return InfoType.Head;
+                case "内容":
+                    return InfoType.Null;
+                default:
+                    return InfoType.Null;
+            }
+        }
     }
 }
